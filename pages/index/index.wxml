@@ -1,0 +1,56 @@
+<view class="navbar" style="height:{{navbar.height}}px;--mw: {{navbar.menuWidth}}px;--mh: {{navbar.menuHeight}}px;--mt: {{navbar.menuTop}}px;--mr: {{navbar.menuRight}}px;">
+  <view class="navbar-inner">
+    <view class="user" bind:tap="showUserSetting">
+      <text class="iuser"></text>
+      <text>{{user.nickName}}</text>
+    </view>
+  </view>
+</view>
+
+
+<view class="container">
+  <view class="panel">
+    <view class="panel-detail">
+      <view id="0" bind:tap="toPageLearnedWords">
+        <text>{{panel.wordTotal}}</text>
+        <text>已学单词</text>
+      </view>
+      <view id="1" bind:tap="toPageLearnedWords">
+        <text>{{panel.wordToday}}</text>
+        <text>今日已学</text>
+      </view>
+      <view>
+        <text>{{user.dakaTotal}}</text>
+        <text>打卡次数</text>
+      </view>
+    </view>
+    <view class="panel-btn" bind:tap="toPageMemory">
+      <text>记单词</text>
+    </view>
+  </view>
+</view>
+
+
+<page-container show="{{userSettingShow}}" round position="{{ user.status ? 'top' : 'center' }}" bind:clickoverlay="showUserSetting" custom-style="border-bottom-left-radius: var(--bd-r);border-bottom-right-radius: var(--bd-r);--mh: {{navbar.menuHeight}}px;--mt: {{navbar.menuTop}}px;">
+  <view class="head">
+    <text>用户设置</text>
+  </view>
+  <view class="body">
+    <form bindsubmit="{{ user.status ? 'userModify' : 'userBind' }}">
+      <view class="form-body">
+        <view class="form-group">
+          <label for="nickname">昵称</label>
+          <input type="nickname" name="nickName" placeholder="{{user.nickName}}"/>
+        </view>
+      </view>
+      <view class="form-btn" wx:if="{{user.status}}">
+        <button type="warn" bind:tap="userDelete">删除</button>
+        <button type="default" form-type="submit">保存</button>
+      </view>
+      <view wx:else>
+        <text style="display: block;margin-bottom: 10px;text-align: center;">首次使用前，需要设置好你的昵称</text>
+        <button type="primary" form-type="submit">开始使用</button>
+      </view>
+    </form>
+  </view>
+</page-container>

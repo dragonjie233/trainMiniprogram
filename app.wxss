@@ -1,0 +1,40 @@
+page {
+  --bd-r: 6px;
+  background: #EDEDED;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* 表单相关控件样式 */
+.form-body {
+  margin-bottom: 20px;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  background: #f1f1f1;
+  border-radius: var(--bd-r);
+  margin-bottom: 10px;
+  padding: 0 15px;
+}
+.form-group label {
+  color: #444444;
+}
+.form-group input {
+  flex: 1;
+  padding: 10px 15px;
+  padding-right: 0;
+  text-align: right;
+}
+.form-btn {
+  display: flex;
+  justify-content: space-between;
+}
+.form-btn button {
+  margin: 0!important;
+}
+.form-btn button[type="warn"] {
+  width: max-content;
+}

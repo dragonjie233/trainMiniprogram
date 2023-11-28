@@ -1,0 +1,17 @@
+<view class="container">
+  <view>
+    <text class="title">{{title}}</text>
+  </view>
+  <view class="main">
+    <view class="wordlist" wx:for="{{wordlist}}" wx:key="i">
+      <text>{{item.word}}</text>
+      <view class="wc-cn">
+        <text>{{item.pos}}</text>
+        <text>{{item.cn}}</text>
+      </view>
+    </view>
+  </view>
+  <view>
+    <button class="clearBtn" type="warn" hidden="{{s}}" bind:tap="clearWords">清除词库数据</button>
+  </view>
+</view>

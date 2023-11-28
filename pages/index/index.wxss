@@ -1,0 +1,75 @@
+@font-face {
+  font-family: 'iconfont';  /* Project id 4346541 */
+  src: url('//at.alicdn.com/t/c/font_4346541_jodx5ktc54e.woff2?t=1701150040716') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4346541_jodx5ktc54e.woff?t=1701150040716') format('woff'),
+       url('//at.alicdn.com/t/c/font_4346541_jodx5ktc54e.ttf?t=1701150040716') format('truetype');
+}
+
+.iuser::before {
+  font-family: 'iconfont';
+  content: '\e6a4';
+  margin-right: 10px;
+  color: #888888;
+}
+
+.navbar .navbar-inner {
+  height: var(--mh);
+  line-height: var(--mh);
+  padding-top: var(--mt);
+  padding-left: var(--mr);
+  padding-right: calc(var(--mw) + 2 * var(--mr));
+
+  display: flex;
+}
+.navbar .user {
+  background: #ffffff;
+  border-radius: var(--bd-r);
+  margin-left: 13px;
+  padding: 0 12px;
+}
+
+
+page-container .head {
+  line-height: var(--mh);
+  font-size: large;
+  padding-top: var(--mt);
+  padding-left: 20px;
+}
+page-container .body {
+  padding: 22px 20px;
+}
+
+
+.panel {
+  border-radius: var(--bd-r);
+  background: #ffffff;
+  padding: 20px 10px;
+}
+.panel-detail {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.panel-detail > view text {
+  text-align: center;
+  display: block;
+  color: #444444;
+  font-size: small;
+}
+.panel-detail > view text:first-child {
+  color: black;
+  font-size: larger;
+  margin-bottom: 4px;
+}
+.panel-btn {
+  width: 80%;
+  color: #ffffff;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  letter-spacing: .8px;
+  margin: auto;
+  margin-top: 20px;
+  padding: 12px 10px;
+  background-color: #07c054;
+  border-radius: var(--bd-r);
+}

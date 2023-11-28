@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="wc">
+    <view class="wc-opt-left">
+      <text>{{wc.optLeft[0]}}</text>
+      <text>{{wc.optLeft[1]}}</text>
+    </view>
+    <movable-area>
+      <movable-view x="{{wcBlockXC}}" disabled="{{wcBlockDisable}}" bindchange="wcBlockSlide" direction="horizontal" damping="50">
+        <view class="wc-block">
+          <text class="wc-block-word">{{wc.word}}</text>
+        </view>
+      </movable-view>
+    </movable-area>
+    <view class="wc-opt-right">
+      <text>{{wc.optRight[0]}}</text>
+      <text>{{wc.optRight[1]}}</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y="true">
+    <view class="wordlist" wx:for="{{learnedWords}}" wx:key="id">
+      <text>{{item.word}}</text>
+      <view class="wc-opt">
+        <text>{{item.pos}}</text>
+        <text>{{item.cn}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
