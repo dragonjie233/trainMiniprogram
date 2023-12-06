@@ -13,7 +13,8 @@ Page({
     wcBlockXC: 0,
     wcBlockDisable: false,
     dictTemp: [],
-    learnedWords: []
+    learnedWords: [],
+    wrongWords: []
   },
   onLoad() {
     this.wcBlockAutoCenter()
@@ -21,6 +22,7 @@ Page({
   },
   onUnload() {
     this.saveWord()
+    this.saveWrongWord()
   },
   wcBlockAutoCenter() {
     const center = (windowWidth - 40 - 212) / 2
@@ -52,6 +54,7 @@ Page({
       this.nextWord()
       wx.vibrateShort({ type: 'light' })
     } else {
+      this.markWrongWord()
       app.msg(0, '选错了')
     }
 
@@ -127,6 +130,14 @@ Page({
       }
     })
   },
+  markWrongWord() {
+    const { wrongWords, dictTemp } = this.data
+    if (wrongWords.length != 0 && dictTemp[0].id == wrongWords[wrongWords.length - 1].id) return;
+
+    const newWrongWords = wrongWords
+          newWrongWords.push(dictTemp[0])
+    this.setData({ wrongWords: newWrongWords })
+  },
   doDaka() {
     wx.showModal({
       title: '打卡助手',
@@ -179,6 +190,35 @@ Page({
       .catch(res => {
         wx.setStorageSync(storageKey, { [time]: learnedWords })
         app.globalData.saveWordCallback()
+      })
+  },
+  saveWrongWord() {
+    const time = util.DATE().date
+    const storageKey = Config.storageKey.wrongWordDict
+    let { wrongWords, learnedWords } = this.data
+
+    // 获取已学单词中的错误单词
+    // 过滤wrongWords和learnedWords数组，若wrongWords的元素在learnedWords中存在则过滤，最后取过滤的结果
+    wrongWords = wrongWords.filter(item2 => learnedWords.some(item1 => item1.id === item2.id))
+
+    // 如果错误单词数据为空则停止往下执行
+    if (!wrongWords.length) return false;
+
+    wx.getStorage({ key: storageKey })
+      .then(res => {
+        const Dict = res.data
+
+        // 如果当前词典有当天数据，则将新数据与旧数据合并
+        if (Array.isArray(Dict[time])) {
+          wrongWords = Dict[time].concat(wrongWords)
+        }
+
+        Dict[time] = wrongWords
+
+        wx.setStorageSync(storageKey, Dict)
+      })
+      .catch(res => {
+        wx.setStorageSync(storageKey, { [time]: wrongWords })
       })
   }
 })

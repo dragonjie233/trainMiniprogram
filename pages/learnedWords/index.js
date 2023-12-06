@@ -6,9 +6,11 @@ Page({
   data: {
     s: null,
     title: '',
-    wordlist: {}
+    wordlist: {},
+    wrongwordlist: {}
   },
   storageKey: Config.storageKey.dict,
+  storageKey2: Config.storageKey.wrongWordDict,
   onLoad(opt) {
     this.setData({ s: parseInt(opt.s) })
     this.loadWords()
@@ -26,6 +28,7 @@ Page({
         if (s) {
           title = '今日所学单词'
           arr = res.data[time]
+          that.loadWrongwords()
         } else {
           title = '已学单词'
           Object.values(res.data).map(val => arr.push(...val))
@@ -36,6 +39,13 @@ Page({
           wordlist: arr
         })
       })
+  },
+  loadWrongwords() {
+    const that = this
+    const time = util.DATE().date
+
+    wx.getStorage({ key: storageKey2 })
+      .then(res => that.setData({ wrongwordlist: res.data[time] }))
   },
   clearWords() {
     const that = this
@@ -55,6 +65,7 @@ Page({
             that.setData({ wordlist: {} })
           })
           .catch(() =>  wx.showToast({ title: '清除失败', icon: 'none' }))
+        wx.setStorageSync(that.storageKey2, {})
       }
     })
   }

@@ -3,7 +3,8 @@ App({
     api: 'https://train.101001000.cc',
     dakaLimit: 10,
     storageKey: {
-      dict: 'Dict'
+      dict: 'Dict',
+      wrongWordDict: 'wrongDict'
     },
   },
   globalData: {

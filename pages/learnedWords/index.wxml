@@ -11,6 +11,20 @@
       </view>
     </view>
   </view>
+  <block wx:if="{{s}}">
+    <view>
+      <text class="title" style="margin-top: 20px;">单词选错记录</text>
+    </view>
+    <view class="main">
+      <view class="wordlist" wx:for="{{wrongwordlist}}" wx:key="i">
+        <text>{{item.word}}</text>
+        <view class="wc-cn">
+          <text>{{item.pos}}</text>
+          <text>{{item.cn}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
   <view>
     <button class="clearBtn" type="warn" hidden="{{s}}" bind:tap="clearWords">清除词库数据</button>
   </view>
