@@ -24,6 +24,7 @@ Page({
     this.saveWord()
     this.saveWrongWord()
   },
+  /** 单词卡自动居中 */
   wcBlockAutoCenter() {
     const center = (windowWidth - 40 - 212) / 2
 
@@ -31,12 +32,14 @@ Page({
       wcBlockXC: center
     })
   },
+  /** 单词卡归位 */
   wcBlockHoming() {
     this.setData({
       wcBlockDisable: true,
       wcBlockXC: this.data.wcBlockXC
     })
   },
+  /** 单词卡滑动事件 */
   wcBlockSlide(e) {
     const { x, source: slideType } = e.detail
     const { wcBlockXC, dictTemp } = this.data
@@ -60,6 +63,7 @@ Page({
 
     this.wcBlockHoming()
   },
+  /** 请求API加载词库数据 */
   loadDicts() {
     const that = this
 
@@ -98,6 +102,7 @@ Page({
       complete: () => wx.hideLoading()
     })
   },
+  /** 显示下个单词 */
   nextWord() {
     const newLearnedWords = this.data.learnedWords
           newLearnedWords.push(this.data.dictTemp[0])
@@ -130,14 +135,19 @@ Page({
       }
     })
   },
+  /** 标记错词 */
   markWrongWord() {
     const { wrongWords, dictTemp } = this.data
+    // 若错词数组为0
+    // 且临时词库数据首项id等于错词数据尾项id（防止重复错词）
+    // 则停止往下执行
     if (wrongWords.length != 0 && dictTemp[0].id == wrongWords[wrongWords.length - 1].id) return;
 
     const newWrongWords = wrongWords
           newWrongWords.push(dictTemp[0])
     this.setData({ wrongWords: newWrongWords })
   },
+  /** 打卡 */
   doDaka() {
     wx.showModal({
       title: '打卡助手',
@@ -165,6 +175,7 @@ Page({
       })
     }
   },
+  /** 保存当前学习的单词 */
   saveWord() {
     const time = util.DATE().date
     const storageKey = Config.storageKey.dict
@@ -192,6 +203,7 @@ Page({
         app.globalData.saveWordCallback()
       })
   },
+  /** 保存当前学习出现的错词 */
   saveWrongWord() {
     const time = util.DATE().date
     const storageKey = Config.storageKey.wrongWordDict

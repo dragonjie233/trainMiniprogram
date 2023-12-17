@@ -12,9 +12,14 @@ Page({
   storageKey: Config.storageKey.dict,
   storageKey2: Config.storageKey.wrongWordDict,
   onLoad(opt) {
-    this.setData({ s: parseInt(opt.s) })
+    // 接收路径参数，用于判断页面来源
+    this.setData({
+      s: parseInt(opt.s),
+      title: parseInt(opt.s) ? '今日所学单词' : '已学单词'
+    })
     this.loadWords()
   },
+  /** 加载单词数据 */
   loadWords() {
     const that = this
     const time = util.DATE().date
@@ -26,11 +31,9 @@ Page({
         let title = ''
 
         if (s) {
-          title = '今日所学单词'
           arr = res.data[time]
           that.loadWrongwords()
         } else {
-          title = '已学单词'
           Object.values(res.data).map(val => arr.push(...val))
         }
         
@@ -40,6 +43,7 @@ Page({
         })
       })
   },
+  /** 加载错误单词数据 */
   loadWrongwords() {
     const that = this
     const time = util.DATE().date
@@ -47,6 +51,7 @@ Page({
     wx.getStorage({ key: that.storageKey2 })
       .then(res => that.setData({ wrongwordlist: res.data[time] }))
   },
+  /** 清除本地单词数据 */
   clearWords() {
     const that = this
 

@@ -25,6 +25,7 @@ Page({
   onShow() {
     this.loadDictInfo()
   },
+  /** 顶部导航条自定义 */
   navbarCustom() {
     const systemInfo = wx.getSystemInfoSync();
     const menuButtonInfo = wx.getMenuButtonBoundingClientRect();
@@ -39,15 +40,19 @@ Page({
       }
     })
   },
+  /** 显示用户设置窗 */
   showUserSetting() {
     this.setData({ userSettingShow: !this.data.userSettingShow })
   },
+  /** 跳转记单词页面 */
   toPageMemory() {
     wx.navigateTo({ url: '/pages/memory/index' })
   },
+  /** 跳转单词数据页面 */
   toPageLearnedWords(e) {
     wx.navigateTo({ url: '/pages/learnedWords/index?s=' + e.currentTarget.id })
   },
+  /** 用户登录 */
   userLogin() {
     const that = this
 
@@ -90,6 +95,7 @@ Page({
       }
     })
   },
+  /** 用户修改事件 */
   userModify(e) {
     const that = this
     const { nickName: name } = e.detail.value
@@ -119,6 +125,7 @@ Page({
       fail: res => app.msg(0, '无法请求')
     })
   },
+  /** 首次使用绑定事件 */
   userBind(e) {
     const that = this
     const { nickName: name } = e.detail.value
@@ -142,6 +149,7 @@ Page({
       fail: res => app.msg(0, '无法请求')
     })
   },
+  /** 用户删除账号 */
   userDelete() {
     wx.showModal({
       title: '确定删除账号？',
@@ -151,6 +159,7 @@ Page({
       }
     })
   },
+  /** 加载本地词库信息 */
   loadDictInfo() {
     const that = this
     const time = util.DATE().date
@@ -177,6 +186,7 @@ Page({
       })
       .catch(res => {})
   },
+  /** 注册记单词页面保存单词的回调函数 */
   registerSaveWordCallback() {
     const that = this
     app.globalData.saveWordCallback = () => that.loadDictInfo()
