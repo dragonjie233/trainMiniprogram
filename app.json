@@ -2,8 +2,33 @@
   "pages": [
     "pages/index/index",
     "pages/memory/index",
-    "pages/learnedWords/index"
+    "pages/learnedWords/index",
+    "pages/math/index",
+    "pages/chinese/index"
   ],
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/assets/images/en.png",
+        "selectedIconPath": "/assets/images/en.png",
+        "text": "英语"
+      },
+      {
+        "pagePath": "pages/math/index",
+        "iconPath": "/assets/images/math.png",
+        "selectedIconPath": "/assets/images/math.png",
+        "text": "数学"
+      },
+      {
+        "pagePath": "pages/chinese/index",
+        "iconPath": "/assets/images/cn.png",
+        "selectedIconPath": "/assets/images/cn.png",
+        "text": "语文"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#EDEDED",

@@ -44,7 +44,7 @@ Page({
     const that = this
     const time = util.DATE().date
 
-    wx.getStorage({ key: storageKey2 })
+    wx.getStorage({ key: that.storageKey2 })
       .then(res => that.setData({ wrongwordlist: res.data[time] }))
   },
   clearWords() {

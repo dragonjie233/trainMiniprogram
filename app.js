@@ -16,7 +16,8 @@ App({
       dakaTotal: 0,
       dakaToday: 0
     },
-    dictLength: 0
+    dictLength: 0,
+    selected: 0
   },
   /**
    * Toast消息提示
